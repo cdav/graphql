@@ -128,7 +128,7 @@ func (c *Client) runWithJSON(ctx context.Context, req *Request, resp interface{}
 
     	for key, values := range req.Header {
             if key == "Host" {
-                req.Host = values[0]
+                r.Host = values[0]
             } else {
             	for _, value := range values {
                     req.Header.Add(key, value)
