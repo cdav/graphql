@@ -125,6 +125,16 @@ func (c *Client) runWithJSON(ctx context.Context, req *Request, resp interface{}
 			r.Header.Add(key, value)
 		}
 	}
+
+    	for key, values := range req.Header {
+            if key == "Host" {
+                req.Host = values[0]
+            } else {
+            	for _, value := range values {
+                    req.Header.Add(key, value)
+            	}
+            }
+    	}
 	c.logf(">> headers: %v", r.Header)
 	r = r.WithContext(ctx)
 	res, err := c.httpClient.Do(r)
